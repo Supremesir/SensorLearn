@@ -78,8 +78,12 @@ public class MainActivity extends AppCompatActivity {
             acceleration.append("三轴加速度："+event.values[0]+","+event.values[1]+","+event.values[2]);
             accelerateLevel.setText(acceleration.toString());
 
+
             //摇动手机震动
             if (event.values[0] > 25 || event.values[1] > 25 || event.values[2] > 25) {
+                //TODO:为api26以下的手机适配震动实现方法
+
+                //该方法只能在api26及以上使用
                 vibrator.vibrate(VibrationEffect.createOneShot(500,255)); //创建一次性震动事件
 
                 Toast.makeText(getApplicationContext(),"摇一摇！",Toast.LENGTH_SHORT).show();//Toast弹出提示
