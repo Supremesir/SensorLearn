@@ -1,5 +1,7 @@
 package com.supremesir.sensorlearn;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -10,6 +12,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.provider.Settings;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView accelerateLevel;
     private TextView fieldLevel;
     private TextView tempLevel;
+    private SeekBar lightBar;
 
 
     @Override
@@ -37,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         accelerateLevel = findViewById(R.id.accelerate_level);
         fieldLevel = findViewById(R.id.field_level);
         tempLevel = findViewById(R.id.temp_level);
+        lightBar = findViewById(R.id.light_bar);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);//注册传感器事件
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);//注册震动事件
@@ -51,9 +59,79 @@ public class MainActivity extends AppCompatActivity {
         sensorManager.registerListener(listener2, sensor2, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(listener3, sensor3, SensorManager.SENSOR_DELAY_NORMAL);
 
+        lightBar.setProgress(getScreenBrightness(this.getBaseContext()));
+        //TODO:优化代码结构
+        lightBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            /**
+             * 拖动中数值的时候
+             * @param fromUser 是否是由用户操作的
+             * */
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setBrightness(MainActivity.this,progress);
+                Toast.makeText(getApplicationContext(),""+progress,Toast.LENGTH_SHORT).show();//Toast弹出提示
+            }
 
+            /**
+             * 当按下的时候
+             */
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                System.out.println("com.example.screenBrightnessTest.MyActivity.onStartTrackingTouch");
+            }
+
+            /**
+             *当松开的时候
+             */
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                System.out.println("com.example.screenBrightnessTest.MyActivity.onStopTrackingTouch");
+            }
+        });
 
     }
+
+    /**
+     * 判断是否开启自动亮度调节
+     */
+    private boolean isAutoBrightness(Context context) {
+        ContentResolver resolver = context.getContentResolver();
+        boolean automicBrightness = false;
+        try {
+            automicBrightness = Settings.System.getInt(resolver,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE) == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+        }
+        return automicBrightness;
+    }
+
+    /**
+     * 获取屏幕的亮度
+     */
+    private int getScreenBrightness(Context context) {
+        int nowBrightnessValue = 0;
+        ContentResolver resolver = context.getContentResolver();
+        try {
+            nowBrightnessValue = android.provider.Settings.System.getInt(resolver, Settings.System.SCREEN_BRIGHTNESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nowBrightnessValue;
+    }
+
+    /**
+     * 设置当前Activity显示时的亮度
+     * 屏幕亮度最大数值一般为255，各款手机有所不同
+     * screenBrightness 的取值范围在[0,1]之间
+     */
+    private void setBrightness(Activity activity, int brightness) {
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        //FIXME:修复当brightness传入0时，亮度调节失控的问题
+        lp.screenBrightness = Float.valueOf(brightness) * (1f / 255f);
+        activity.getWindow().setAttributes(lp);
+    }
+
 
     private SensorEventListener listener=new SensorEventListener() {
         @Override
@@ -78,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             acceleration.append("三轴加速度："+event.values[0]+","+event.values[1]+","+event.values[2]);
             accelerateLevel.setText(acceleration.toString());
 
-
+            //FIXME:修复震动突然失效的问题
             //摇动手机震动
             if (event.values[0] > 25 || event.values[1] > 25 || event.values[2] > 25) {
                 //TODO:为api26以下的手机适配震动实现方法
@@ -137,7 +215,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
-
 
 
 
