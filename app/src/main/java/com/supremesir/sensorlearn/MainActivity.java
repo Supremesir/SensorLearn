@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         lightBar.setProgress(getScreenBrightness(this.getBaseContext()));//设置SeekBar数值为当前屏幕亮度
-        lightText.setText(""+getScreenBrightness(this.getBaseContext()));//设置LightText文字显示为当前屏幕亮度
+        lightText.setText(""+getScreenBrightness(this.getBaseContext()));//设置TextView文字显示为当前屏幕亮度
         //TODO:优化代码结构
         lightBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             /**
@@ -72,8 +72,14 @@ public class MainActivity extends AppCompatActivity {
              * */
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                setBrightness(MainActivity.this,progress);
+                //TextView显示选择数值
                 lightText.setText(""+progress);
+                //解决数值为0时，亮度调节失效的问题（若数值为0，则设置亮度为1）
+                if (progress == 0) {
+                    setBrightness(MainActivity.this, 1);
+                } else {
+                    setBrightness(MainActivity.this,progress);
+                }
 //                Toast.makeText(getApplicationContext(),""+progress,Toast.LENGTH_SHORT).show();//Toast弹出提示
             }
             @Override
@@ -130,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * 监听光照强度传感器
+     */
     private SensorEventListener listener=new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
@@ -144,6 +153,9 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * 监听三轴加速度传感器
+     */
     private SensorEventListener listener1=new SensorEventListener() {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
@@ -153,15 +165,15 @@ public class MainActivity extends AppCompatActivity {
             acceleration.append("三轴加速度："+event.values[0]+","+event.values[1]+","+event.values[2]);
             accelerateLevel.setText(acceleration.toString());
 
-            //FIXME:修复震动突然失效的问题
-            //摇动手机震动
+            /**
+             * API26及以上手机震动事件实现
+             * TODO:为api26以下的手机适配震动实现方法
+             */
             if (event.values[0] > 15 || event.values[1] > 15 || event.values[2] > 15) {
-                //TODO:为api26以下的手机适配震动实现方法
 
                 //该方法只能在api26及以上使用
                 vibrator.vibrate(VibrationEffect.createOneShot(500,255)); //创建一次性震动事件
                 Toast.makeText(getApplicationContext(),"摇一摇！",Toast.LENGTH_SHORT).show();//Toast弹出提示
-
             }
 
         }
@@ -172,6 +184,9 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * 监听磁场传感器
+     */
     private SensorEventListener listener2=new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
@@ -187,11 +202,16 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * 监听距离传感器
+     * 无遮挡时，event.values[0]>5
+     */
     private SensorEventListener listener3=new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
 
             StringBuilder temps = new StringBuilder();
+
             if (event.values[0] > 5) {
                 temps.append("距离传感器无遮挡");
                 tempLevel.setTextColor(Color.BLACK);
@@ -213,8 +233,9 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-
-
+    /**
+     * 程序结束时注销注册过的传感器监听
+     */
     protected void onDestroy() {
         super.onDestroy();
         if (sensorManager != null) {
