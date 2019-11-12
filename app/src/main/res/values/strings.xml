@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SensorLearn</string>
+    <string name="light_text">屏幕亮度</string>
 </resources>

@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView accelerateLevel;
     private TextView fieldLevel;
     private TextView tempLevel;
+    private TextView lightText;
     private SeekBar lightBar;
 
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         fieldLevel = findViewById(R.id.field_level);
         tempLevel = findViewById(R.id.temp_level);
         lightBar = findViewById(R.id.light_bar);
+        lightText = findViewById(R.id.light_text);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);//注册传感器事件
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);//注册震动事件
@@ -59,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
         sensorManager.registerListener(listener2, sensor2, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(listener3, sensor3, SensorManager.SENSOR_DELAY_NORMAL);
 
-        lightBar.setProgress(getScreenBrightness(this.getBaseContext()));
+
+        lightBar.setProgress(getScreenBrightness(this.getBaseContext()));//设置SeekBar数值为当前屏幕亮度
+        lightText.setText(""+getScreenBrightness(this.getBaseContext()));//设置LightText文字显示为当前屏幕亮度
         //TODO:优化代码结构
         lightBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             /**
@@ -69,24 +73,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 setBrightness(MainActivity.this,progress);
-                Toast.makeText(getApplicationContext(),""+progress,Toast.LENGTH_SHORT).show();//Toast弹出提示
+                lightText.setText(""+progress);
+//                Toast.makeText(getApplicationContext(),""+progress,Toast.LENGTH_SHORT).show();//Toast弹出提示
             }
-
-            /**
-             * 当按下的时候
-             */
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                System.out.println("com.example.screenBrightnessTest.MyActivity.onStartTrackingTouch");
-            }
 
-            /**
-             *当松开的时候
-             */
+            } //按下时
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                System.out.println("com.example.screenBrightnessTest.MyActivity.onStopTrackingTouch");
-            }
+
+            }//松开时
         });
 
     }
@@ -158,12 +155,11 @@ public class MainActivity extends AppCompatActivity {
 
             //FIXME:修复震动突然失效的问题
             //摇动手机震动
-            if (event.values[0] > 25 || event.values[1] > 25 || event.values[2] > 25) {
+            if (event.values[0] > 15 || event.values[1] > 15 || event.values[2] > 15) {
                 //TODO:为api26以下的手机适配震动实现方法
 
                 //该方法只能在api26及以上使用
                 vibrator.vibrate(VibrationEffect.createOneShot(500,255)); //创建一次性震动事件
-
                 Toast.makeText(getApplicationContext(),"摇一摇！",Toast.LENGTH_SHORT).show();//Toast弹出提示
 
             }
