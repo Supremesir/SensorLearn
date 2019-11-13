@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
             }//松开时
         });
 
+        /**
+         * 点击按钮跳转到重力球界面
+         */
         gravityBall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * 点击按钮跳转到指南针界面
+         */
         compass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
