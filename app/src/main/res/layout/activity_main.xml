@@ -10,8 +10,8 @@
         android:id="@+id/light_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -55,10 +55,29 @@
         android:id="@+id/light_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:text="@string/light_text"
         app:layout_constraintLeft_toRightOf="@id/light_bar"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/temp_level" />
+
+    <Button
+        android:id="@+id/gravity_ball"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gravity_ball"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/light_bar"/>
+
+    <Button
+        android:id="@+id/compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/compass"
+        app:layout_constraintTop_toBottomOf="@+id/gravity_ball"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

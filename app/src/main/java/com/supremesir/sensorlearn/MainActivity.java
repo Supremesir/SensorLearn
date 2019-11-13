@@ -3,6 +3,7 @@ package com.supremesir.sensorlearn;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -15,6 +16,7 @@ import android.os.Vibrator;
 import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tempLevel;
     private TextView lightText;
     private SeekBar lightBar;
+    private Button gravityBall;
+    private Button compass;
 
 
     @Override
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         tempLevel = findViewById(R.id.temp_level);
         lightBar = findViewById(R.id.light_bar);
         lightText = findViewById(R.id.light_text);
+        gravityBall = findViewById(R.id.gravity_ball);
+        compass = findViewById(R.id.compass);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);//注册传感器事件
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);//注册震动事件
@@ -91,6 +97,23 @@ public class MainActivity extends AppCompatActivity {
 
             }//松开时
         });
+
+        gravityBall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GravityBall.class);
+                startActivity(intent);
+            }
+        });
+
+        compass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Compass.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

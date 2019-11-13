@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">SensorLearn</string>
     <string name="light_text">屏幕亮度</string>
+    <string name="gravity_ball">Gravity_Ball</string>
+    <string name="compass">Compass</string>
 </resources>
