@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         gravityBall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GravityBall.class);
+                Intent intent = new Intent(MainActivity.this, GravityBallActivity.class);
                 startActivity(intent);
             }
         });
