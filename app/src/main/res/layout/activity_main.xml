@@ -7,14 +7,25 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/light_level"
+        android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:text="@string/text1"
+        android:textSize="50px"
+        android:textColor="#ff011f"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/light_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="#000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/text1" />
 
     <TextView
         android:id="@+id/accelerate_level"
@@ -43,13 +54,26 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
+    <TextView
+        android:id="@+id/text2"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text2"
+        android:textSize="50px"
+        android:textColor="#ff011f"
+        app:layout_constraintTop_toBottomOf="@id/temp_level"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
     <SeekBar
         android:id="@+id/light_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/light_text"
-        app:layout_constraintTop_toBottomOf="@id/temp_level" />
+        app:layout_constraintTop_toBottomOf="@id/text2" />
 
     <TextView
         android:id="@+id/light_text"
@@ -59,7 +83,30 @@
         android:text="@string/light_text"
         app:layout_constraintLeft_toRightOf="@id/light_bar"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temp_level" />
+        app:layout_constraintTop_toBottomOf="@id/text2" />
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text3"
+        android:textSize="50px"
+        android:textColor="#ff011f"
+        app:layout_constraintTop_toBottomOf="@id/light_bar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text4"
+        android:textSize="50px"
+        android:textColor="#ff011f"
+        app:layout_constraintTop_toBottomOf="@id/text3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/gravity_ball"
@@ -68,14 +115,25 @@
         android:text="@string/gravity_ball"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/light_bar"/>
+        app:layout_constraintTop_toBottomOf="@id/text4"/>
+
+    <TextView
+        android:id="@+id/text5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text5"
+        android:textSize="50px"
+        android:textColor="#ff011f"
+        app:layout_constraintTop_toBottomOf="@id/gravity_ball"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/compass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/compass"
-        app:layout_constraintTop_toBottomOf="@+id/gravity_ball"
+        app:layout_constraintTop_toBottomOf="@+id/text5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 

@@ -15,4 +15,11 @@
     <string name="sotw_northwest">NW</string>
     <string name="sotw_southeast">SE</string>
     <string name="sotw_southwest">SW</string>
+
+    <string name="text1">实验内容1：传感器信息</string>
+    <string name="text2">实验内容2：光线传感器</string>
+    <string name="text3">实验内容3：摇一摇</string>
+    <string name="text4">实验内容4：重力小球</string>
+    <string name="text5">实验内容5：指南针</string>
+
 </resources>
