@@ -40,7 +40,7 @@
         android:id="@+id/field_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
+        android:textColor="@color/colorBlack"
         app:layout_constraintTop_toBottomOf="@id/accelerate_level"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -49,7 +49,7 @@
         android:id="@+id/temp_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
+        android:textColor="@color/colorBlack"
         app:layout_constraintTop_toBottomOf="@id/field_level"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text2"
         android:textSize="50px"
-        android:textColor="#ff011f"
+        android:textColor="@color/colorRed"
         app:layout_constraintTop_toBottomOf="@id/temp_level"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -90,8 +90,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text3"
-        android:textSize="50px"
-        android:textColor="#ff011f"
+        android:textSize="50dp"
+        android:textColor="@color/colorRed"
         app:layout_constraintTop_toBottomOf="@id/light_bar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text4"
         android:textSize="50px"
-        android:textColor="#ff011f"
+        android:textColor="@color/colorRed"
         app:layout_constraintTop_toBottomOf="@id/text3"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text5"
         android:textSize="50px"
-        android:textColor="#ff011f"
+        android:textColor="@color/colorRed"
         app:layout_constraintTop_toBottomOf="@id/gravity_ball"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
