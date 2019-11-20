@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         compass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Compass.class);
+                Intent intent = new Intent(MainActivity.this, CompassActivity.class);
                 startActivity(intent);
             }
         });
