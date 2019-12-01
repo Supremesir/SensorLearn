@@ -1,26 +1,9 @@
 package com.supremesir.sensorlearn;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Vibrator;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.Window;
 import android.view.WindowManager;
-
-import javax.security.auth.callback.Callback;
 
 public class GravityBallActivity extends AppCompatActivity {
 
